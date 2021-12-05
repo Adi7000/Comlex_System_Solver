@@ -1,10 +1,25 @@
-# import sympy 
 from sympy import * 
-from cmath import polar
+from cmath import polar, rect
 from math import pi
+
+
 j=1j
 rad2deg=180/pi
-##############################################################
+
+def phasor(complex_num):
+    magnitude, angle = polar(complex_num)
+    if mode:
+        return tuple(magnitude, angle*rad2deg)
+    else:
+        return tuple(magnitude, angle)
+
+def rectangular(polar, dmode = mode):
+    if dmode:
+        return rect(polar[0],polar[1]/rad2deg)
+    else:
+        return rect(polar[0],polar[1])
+
+################# Only modify these values ###################
 # Degrees (True) or Radians (False)
 mode = True
 # input number of decimal digits to round to
@@ -16,11 +31,12 @@ matrix=[
 ]
 ##############################################################
 assert type(mode) is bool, "set mode to True for degrees or False for radians"
+
 #show the input matrix
 print("input Matrix:")
 for row in matrix:
     print(row)
-print()   
+print()
 
 # Use sympy.Matrix() class and sympy.rref() method 
 M = Matrix([row for row in matrix])
@@ -35,7 +51,7 @@ for row in mat:
 print()'''
 
 # convert to processbale form (lst of lst)
-sq_matrix = []    # square coordinate matrix
+rect_matrix = []    # square coordinate matrix
 for row in mat:
     row = ''.join(row.split()).strip(',').strip(']').split('*I')        # Format changes
     
@@ -52,13 +68,10 @@ for row in mat:
             row[i] = int(row[i])
         else:
             row[i] = complex(row[i])
-    sq_matrix.append(row)
-    #sq_matrix.append(list(map(complex, row.split(','))))
+    rect_matrix.append(row)
 
-
-# print sq_matrix
-print("square coordinate matrix:")
-for row in sq_matrix:
+print("rectangular coordinate matrix:")
+for row in rect_matrix:
     for i in range(len(row)):
         element = row[i]
         if type(element) is float or type(element) is complex:
@@ -68,7 +81,7 @@ print()
 
 # create polar matrix
 pol_matrix = []
-for row in sq_matrix:
+for row in rect_matrix:
     for i in range(len(row)):
         if not (row[i] == 1 or row[i] == 0):
             row[i] = polar(row[i])
@@ -90,3 +103,4 @@ for row in pol_matrix:
             else:
                 row[i] = (round(row[i][0], decimal_digits), round(row[i][1], decimal_digits))
     print(row) 
+
