@@ -2,7 +2,7 @@ from sympy import *
 from cmath import polar, rect
 from math import pi
 
-
+#math constants
 j=1j
 rad2deg=180/pi
 
@@ -22,9 +22,9 @@ assert type(mode) is bool, "set mode to True for degrees or False for radians"
 def phasor(complex_num):
     magnitude, angle = polar(complex_num)
     if mode:
-        return tuple(magnitude, angle*rad2deg)
+        return tuple((magnitude, angle*rad2deg))
     else:
-        return tuple(magnitude, angle)
+        return tuple((magnitude, angle))
 
 def rectangular(polar, dmode = mode):
     if dmode:
@@ -103,4 +103,22 @@ for row in pol_matrix:
             else:
                 row[i] = (round(row[i][0], decimal_digits), round(row[i][1], decimal_digits))
     print(row) 
+    
+    
+def main():
+    
+    z1 = -30*30j/(30-30j)
+    z2 = 10*(30j)/(10+30j)
+    z3 = 10*(-10j)/(10-10j)
+    Is = rectangular((18,30))
+    Vs = rectangular((8,60))*z2
+    Is2 = Vs/(z1+z2)
+    z4 = (z1+z2)*z3/(z1+z2+z3)
+    
+    Is3 = Is + Is2
+    S = phasor(1/2*Is3/z4*(14.9-11.7j))
+    a=1
 
+if __name__ == "__main__":
+    
+    main()
