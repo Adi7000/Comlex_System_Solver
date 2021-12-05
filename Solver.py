@@ -6,6 +6,19 @@ from math import pi
 j=1j
 rad2deg=180/pi
 
+################# Only modify these values ###################
+# Degrees (True) or Radians (False)
+mode = True
+# input number of decimal digits to round to
+decimal_digits = 2
+# input matrix (change this as needed)
+matrix=[
+    [1-1.5j,1.5j,193.7+10j],
+    [1.5j, 3+1.3j, 0]
+]
+##############################################################
+assert type(mode) is bool, "set mode to True for degrees or False for radians"
+
 def phasor(complex_num):
     magnitude, angle = polar(complex_num)
     if mode:
@@ -18,19 +31,6 @@ def rectangular(polar, dmode = mode):
         return rect(polar[0],polar[1]/rad2deg)
     else:
         return rect(polar[0],polar[1])
-
-################# Only modify these values ###################
-# Degrees (True) or Radians (False)
-mode = True
-# input number of decimal digits to round to
-decimal_digits = 2
-# input matrix (change this as needed)
-matrix=[
-    [1, 0, 2.3456 - 2.3456j],
-    [0, 1, 1+2j]
-]
-##############################################################
-assert type(mode) is bool, "set mode to True for degrees or False for radians"
 
 #show the input matrix
 print("input Matrix:")
