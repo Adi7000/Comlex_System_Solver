@@ -14,5 +14,5 @@ Also does conversion between polar and rectangular, usage:
         (r, phi) = phasor(complex_num)    
             Output is tuple
         (a + bj) = rectanglar(polar)
-            Output is of typle complex
+            Output is of type complex
         
